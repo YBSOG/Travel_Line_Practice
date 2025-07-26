@@ -1,76 +1,102 @@
-﻿public class OrderManager
+﻿Run();
+void Run()
 {
-    public static void Main()
+    OrderCreation();
+}
+
+string GetValidInput( string userStringInput )
+{
+    while ( IsInputValid( userStringInput ) )
     {
-        OrderCreation();
+        Console.WriteLine( "Введенное значение не подходит, попробуйте снова" );
+        userStringInput = Console.ReadLine();
     }
 
-    public static string CheckStringInput( string userStringInput )
+    return userStringInput;
+}
+
+bool IsInputValid( string userStringInput )
+{
+    return string.IsNullOrWhiteSpace( userStringInput );
+}
+
+string GetUserName()
+{
+    Console.WriteLine( "Введите ваше имя:" );
+    string userName = GetValidInput( Console.ReadLine() );
+    return userName;
+}
+
+string GetProductName()
+{
+    Console.WriteLine( "Введите наименования необходимого товара:" );
+    string productName = GetValidInput( Console.ReadLine() );
+    return productName;
+}
+
+string GetUserAddress()
+{
+    Console.WriteLine( "Введите адрес, куда будет доставлен товар:" );
+    string userAddress = GetValidInput( Console.ReadLine() );
+    return userAddress;
+}
+
+int GetCountOfProduct()
+{
+    int countOfProduct = 0;
+    Console.WriteLine( "Введите необходимое количество единиц товара (цифрой от 1 до 9):" );
+
+    bool countApproval = false;
+    do
     {
-        if ( string.IsNullOrWhiteSpace( userStringInput ) )
+        string userCountInput = Console.ReadLine();
+        if ( int.TryParse( userCountInput, out int number ) )
         {
-            Console.WriteLine( "Введенное значние не подходит, попробуйте ещё раз." );
-            return CheckStringInput( Console.ReadLine() );
-        }
-        else
-        {
-            return userStringInput;
-        }
-    }
-
-    public static void OrderCreation()
-    {
-        string name;
-        string product;
-        int count;
-        string address;
-        string answer;
-        DateTime todays_date = DateTime.Now;
-
-        Console.WriteLine( "Введите ваше имя:" );
-        name = CheckStringInput( Console.ReadLine() );
-
-        Console.WriteLine( "Введите наименования необходимого товара:" );
-        product = CheckStringInput( Console.ReadLine() );
-
-        Console.WriteLine( "Введите необходимое количество единиц товара (цифрой от 1 до 9):" );
-        while ( true )
-        {
-            var countInput = Console.ReadLine();
-            if ( int.TryParse( countInput, out int number ) )
+            if ( number > 0 && number < 10 )
             {
-                if ( number > 0 && number < 10 )
-                {
-                    count = number;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine( "Введенное значение не подходит, введите количество заново:" );
-                }
+                countOfProduct = number;
+                countApproval = true;
             }
             else
             {
                 Console.WriteLine( "Введенное значение не подходит, введите количество заново:" );
             }
         }
-
-        Console.WriteLine( "Введите адрес, куда будет доставлен товар:" );
-        address = CheckStringInput( Console.ReadLine() );
-
-
-        Console.WriteLine( $"Здравствуйте, {name}, вы заказали {count} {product} на адрес {address}. Введите \"да\" для подтверждения заказа" );
-        answer = Console.ReadLine();
-        if ( answer == "да" )
-        {
-            Console.WriteLine();
-            Console.WriteLine( $"{name}! Ваш заказ {product} в количестве {count} оформлен! Ожидайте доставку по адресу {address} к {todays_date.AddDays( 3 )}" );
-        }
         else
         {
-            Console.WriteLine( "Сформируем заказ заново." );
-            Console.WriteLine();
-            OrderManager.Main();
+            Console.WriteLine( "Введенное значение не подходит, введите количество заново:" );
         }
+    } while ( !countApproval );
+
+    return countOfProduct;
+}
+
+void OrderConfiramtion( string name, string product, int count, string address )
+{
+    Console.WriteLine( $"Здравствуйте, {name}, вы заказали {count} {product} на адрес {address}. Введите \"да\" для подтверждения заказа:" );
+
+    string answer = Console.ReadLine();
+    if ( answer == "да" )
+    {
+        DateTime todaysDate = DateTime.Now.ToUniversalTime();
+        string orderArrivalDate = ( todaysDate.AddDays( 3 ) ).ToString( "dd/MM/yyyy" );
+        Console.WriteLine();
+        Console.WriteLine( $"{name}! Ваш заказ {product} в количестве {count} оформлен! Ожидайте доставку по адресу {address} к {orderArrivalDate}" );
     }
+    else
+    {
+        Console.WriteLine( "Сформируем заказ заново." );
+        Console.WriteLine();
+        Run();
+    }
+}
+
+void OrderCreation()
+{
+    string name = GetUserName();
+    string product = GetProductName();
+    int count = GetCountOfProduct();
+    string address = GetUserAddress();
+
+    OrderConfiramtion( name, product, count, address );
 }

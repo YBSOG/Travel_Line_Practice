@@ -1,0 +1,14 @@
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\Gladiators.GeneratedMSBuildEditorConfig.editorconfig
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\Gladiators.AssemblyInfoInputs.cache
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\Gladiators.AssemblyInfo.cs
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\Gladiators.csproj.CoreCompileInputs.cache
+C:\itBoy\C#\Dz\Gladiators\Gladiators\bin\Debug\net8.0\Gladiators.exe
+C:\itBoy\C#\Dz\Gladiators\Gladiators\bin\Debug\net8.0\Gladiators.deps.json
+C:\itBoy\C#\Dz\Gladiators\Gladiators\bin\Debug\net8.0\Gladiators.runtimeconfig.json
+C:\itBoy\C#\Dz\Gladiators\Gladiators\bin\Debug\net8.0\Gladiators.dll
+C:\itBoy\C#\Dz\Gladiators\Gladiators\bin\Debug\net8.0\Gladiators.pdb
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\Gladiators.dll
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\refint\Gladiators.dll
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\Gladiators.pdb
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\Gladiators.genruntimeconfig.cache
+C:\itBoy\C#\Dz\Gladiators\Gladiators\obj\Debug\net8.0\ref\Gladiators.dll

@@ -38,6 +38,12 @@ namespace Gladiators.GameMaster
                     Console.WriteLine( $"{defender.Name} наносит смертельный удар по {attacker.Name} и становится победителем!" );
                     break;
                 }
+
+                if ( i == 20 )
+                {
+                    Console.WriteLine( "Бой затянулся, придестя его остановить..." );
+                    break;
+                }
             }
         }
 

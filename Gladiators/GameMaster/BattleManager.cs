@@ -6,7 +6,7 @@ namespace Gladiators.GameMaster
     {
         public static void Battle( List<Fighter> _fighters )
         {
-            Console.WriteLine( "Бой" );
+            Console.WriteLine( "Р‘РѕР№" );
 
             _fighters = SortFightersByInitiative( _fighters );
 
@@ -19,37 +19,26 @@ namespace Gladiators.GameMaster
             for ( int i = 1; i <= 20; i++ )
             {
                 Console.WriteLine();
-                Console.WriteLine( $"Раунд: {i}" );
+                Console.WriteLine( $"Р Р°СѓРЅРґ: {i}" );
 
                 int attackerDamage = attacker.CalculateAttackDamage();
                 defenderHp = defender.TakeDamage( attackerDamage, defenderHp );
-                Console.WriteLine( $"{attacker.Name} наносит {attackerDamage}, у {defender.Name} остается {defenderHp} хп." );
+                Console.WriteLine( $"{attacker.Name} РЅР°РЅРѕСЃРёС‚ {attackerDamage}, Сѓ {defender.Name} РѕСЃС‚Р°РµС‚СЃСЏ {defenderHp} С…Рї." );
                 if ( defenderHp == 0 )
                 {
-                    Console.WriteLine( $"{attacker.Name} наносит смертельный удар по {defender.Name} и становится победителем!" );
+                    Console.WriteLine( $"{attacker.Name} РЅР°РЅРѕСЃРёС‚ СЃРјРµСЂС‚РµР»СЊРЅС‹Р№ СѓРґР°СЂ РїРѕ {defender.Name} Рё СЃС‚Р°РЅРѕРІРёС‚СЃСЏ РїРѕР±РµРґРёС‚РµР»РµРј!" );
                     break;
                 }
 
                 int defenderDamage = defender.CalculateAttackDamage();
                 attackerHp = attacker.TakeDamage( defenderDamage, attackerHp );
-                Console.WriteLine( $"{defender.Name} наносит {defenderDamage}, у {attacker.Name} остается {attackerHp} хп." );
+                Console.WriteLine( $"{defender.Name} РЅР°РЅРѕСЃРёС‚ {defenderDamage}, Сѓ {attacker.Name} РѕСЃС‚Р°РµС‚СЃСЏ {attackerHp} С…Рї." );
                 if ( attackerHp == 0 )
                 {
-                    Console.WriteLine( $"{defender.Name} наносит смертельный удар по {attacker.Name} и становится победителем!" );
+                    Console.WriteLine( $"{defender.Name} РЅР°РЅРѕСЃРёС‚ СЃРјРµСЂС‚РµР»СЊРЅС‹Р№ СѓРґР°СЂ РїРѕ {attacker.Name} Рё СЃС‚Р°РЅРѕРІРёС‚СЃСЏ РїРѕР±РµРґРёС‚РµР»РµРј!" );
                     break;
                 }
             }
-
-            //Console.WriteLine( "Бой затянулся, придется его остановить..." );
-        }
-
-        private static bool IsFighterAlive( int fighterHp )
-        {
-            if ( fighterHp >= 1 )
-            {
-                return true;
-            }
-            else return false;
         }
 
         private static List<Fighter> SortFightersByInitiative( List<Fighter> _fighters )
@@ -58,8 +47,8 @@ namespace Gladiators.GameMaster
             Fighter attacker = _fighters[ 0 ];
             Fighter defender = _fighters[ 1 ];
 
-            Console.WriteLine( $"Инициатива бойцов: {attacker.Name} - {attacker.FighterStatus.Initiative}, {defender.Name} - {defender.FighterStatus.Initiative}." );
-            Console.WriteLine( $"{attacker.Name} атакует первым." );
+            Console.WriteLine( $"РРЅРёС†РёР°С‚РёРІР° Р±РѕР№С†РѕРІ: {attacker.Name} - {attacker.FighterStatus.Initiative}, {defender.Name} - {defender.FighterStatus.Initiative}." );
+            Console.WriteLine( $"{attacker.Name} Р°С‚Р°РєСѓРµС‚ РїРµСЂРІС‹Рј." );
 
             return _fighters;
         }

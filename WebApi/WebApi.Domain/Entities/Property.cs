@@ -8,6 +8,7 @@ public class Property
     public string Address { get; set; } = string.Empty;
     public decimal Latitude { get; set; }
     public decimal Longitude { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public List<RoomType> RoomTypes { get; set; } = new();
     public List<Reservation> Reservations { get; set; } = new();

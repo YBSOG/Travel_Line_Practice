@@ -19,8 +19,7 @@ public class Program
         builder.Services.AddDbContext<WebApiDbContext>( options =>
             options.UseSqlServer(
                 builder.Configuration.GetConnectionString( "DefaultConnection" ),
-                sqlServerOptions => sqlServerOptions.MigrationsAssembly( "WebApi.Infrastructure" )
-        ) );
+                b => b.MigrationsAssembly( "WebApi.Infrastructure" ) ) );
 
         builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
         builder.Services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();

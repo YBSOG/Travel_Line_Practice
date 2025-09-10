@@ -40,14 +40,14 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<RoomTypeResponseDto>> CreateRoomType( [FromBody] RoomTypeResponseDto roomTypeDto )
+        public async Task<ActionResult<RoomTypeCreateDto>> CreateRoomType( [FromBody] RoomTypeCreateDto roomTypeDto )
         {
             Property? property = await _propertyRepository.GetById( roomTypeDto.PropertyId );
             if ( property is null ) return BadRequest( "Property don't exist" );
 
             RoomType roomType = new RoomType
             {
-                PropertyId = roomTypeDto.Id,
+                PropertyId = roomTypeDto.PropertyId,
                 Name = roomTypeDto.Name,
                 DailyPrice = roomTypeDto.DailyPrice,
                 Currency = roomTypeDto.Currency,
@@ -58,7 +58,10 @@ namespace WebApi.Controllers
             };
 
             await _roomTypeRepository.Create( roomType );
-            return CreatedAtAction( nameof( GetRoomById ), new { id = roomType.Id }, Mapper.MapToRoomTypeDto( roomType ) );
+
+            return CreatedAtAction( nameof( GetRoomById ),
+                new { id = roomType.Id },
+                Mapper.MapToRoomTypeDto( roomType ) );
         }
 
         [HttpPut( "{id:int}" )]
@@ -68,6 +71,7 @@ namespace WebApi.Controllers
             if ( roomType is null ) return NotFound( "RoomType don't exist" );
 
             roomType.Name = roomTypeDto.Name;
+            roomType.PropertyId = roomTypeDto.PropertyId;
             roomType.DailyPrice = roomTypeDto.DailyPrice;
             roomType.Currency = roomTypeDto.Currency;
             roomType.MinPersonCount = roomTypeDto.MinPersonCount;
@@ -76,6 +80,7 @@ namespace WebApi.Controllers
             roomType.Amenities = roomTypeDto.Amenities;
 
             await _roomTypeRepository.Update( roomType );
+
             return NoContent();
         }
 
@@ -83,9 +88,11 @@ namespace WebApi.Controllers
         public async Task<ActionResult<RoomType>> DeleteRoomType( [FromRoute] int id )
         {
             RoomType? roomType = await _roomTypeRepository.GetById( id );
-            if ( roomType is null ) return NotFound( "RoomType don't exist" );
+            if ( roomType is null )
+                return NotFound( "RoomType don't exist" );
 
-            await _roomTypeRepository.Delete( roomType );
+            roomType.IsDeleted = true;
+            await _roomTypeRepository.Update( roomType );
             return NoContent();
         }
     }

@@ -22,17 +22,21 @@ public class RoomTypeRepository : IRoomTypeRepository
 
     public async Task<IEnumerable<RoomType>> GetAll()
     {
-        return await _dbContext.RoomType.ToListAsync();
+        return await _dbContext.RoomType
+            .Where( rt => !rt.IsDeleted )
+            .ToListAsync();
     }
 
     public async Task<RoomType?> GetById( int id )
     {
-        return await _dbContext.Set<RoomType>().FirstOrDefaultAsync( p => p.Id == id );
+        return await _dbContext.RoomType.FirstOrDefaultAsync( rt => rt.Id == id && !rt.IsDeleted );
     }
 
     public async Task<IEnumerable<RoomType>> GetByPropertyId( int propertyId )
     {
-        return await _dbContext.RoomType.Where( rt => rt.PropertyId == propertyId ).ToListAsync();
+        return await _dbContext.RoomType
+            .Where( rt => rt.PropertyId == propertyId && !rt.IsDeleted)
+            .ToListAsync();
     }
 
     public async Task<bool> IsRoomTypeAvailable( int roomTypeId, DateTime arrivalDate, DateTime departureDate )
@@ -53,12 +57,6 @@ public class RoomTypeRepository : IRoomTypeRepository
     public async Task Update( RoomType roomType )
     {
         _dbContext.RoomType.Update( roomType );
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public async Task Delete( RoomType roomType )
-    {
-        _dbContext.RoomType.Remove( roomType );
         await _dbContext.SaveChangesAsync();
     }
 }

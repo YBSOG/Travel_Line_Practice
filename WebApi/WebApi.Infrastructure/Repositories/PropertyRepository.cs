@@ -22,29 +22,31 @@ public class PropertyRepository : IPropertyRepository
     public async Task<IEnumerable<Property>> GetAll()
     {
         return await _dbContext.Properties
+            .Where( p => !p.IsDeleted )
             .Include( p => p.RoomTypes )
             .ToListAsync();
     }
 
     public async Task<Property?> GetById( int id )
     {
-        return await _dbContext.Set<Property>()
+        return await _dbContext.Properties
             .Include( p => p.RoomTypes )
-            .FirstOrDefaultAsync( p => p.Id == id );
+            .FirstOrDefaultAsync( p => p.Id == id && !p.IsDeleted );
     }
 
     public async Task<IEnumerable<Property>> GetByCity( string city )
     {
-        return await _dbContext.Set<Property>()
+        return await _dbContext.Properties
             .Include( p => p.RoomTypes )
-            .Where( p => p.City.ToLower() == city.ToLower() )
+            .Where( p => p.City.ToLower() == city.ToLower() && !p.IsDeleted )
             .ToListAsync();
     }
 
     public async Task<IEnumerable<Property?>?> Search( string? city, int? minPersonCount, int? maxPersonCount, decimal? maxPrice )
     {
-        IQueryable<Property> query = _dbContext.Set<Property>()
-                                    .Include( p => p.RoomTypes )
+        IQueryable<Property> query = _dbContext.Properties
+                                    .Where ( p => !p.IsDeleted )
+                                    .Include( p => p.RoomTypes.Where( rt => !rt.IsDeleted ) )
                                     .AsQueryable();
 
         if ( !string.IsNullOrEmpty( city ) )
@@ -74,11 +76,5 @@ public class PropertyRepository : IPropertyRepository
     {
         _dbContext.Properties.Update( property );
          await _dbContext.SaveChangesAsync();
-    }
-
-    public async Task Delete( Property property )
-    {
-        _dbContext.Properties.Remove( property );
-        await _dbContext.SaveChangesAsync();
     }
 }

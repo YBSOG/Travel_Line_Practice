@@ -23,7 +23,7 @@ public class ReservationRepository : IReservationRepository
         return await _dbContext.Reservations
                     .Include( r => r.Property )
                     .Include( r => r.RoomType )
-                    .Where( r => r.IsCancelled )
+                    .Where( r => !r.IsCancelled )
                     .ToListAsync();
     }
 
@@ -32,6 +32,7 @@ public class ReservationRepository : IReservationRepository
         return await _dbContext.Reservations
                     .Include( r => r.Property )
                     .Include( r => r.RoomType )
+                    .Where( r => !r.IsCancelled)
                     .FirstOrDefaultAsync( p => p.Id == id );
     }
 
@@ -61,12 +62,6 @@ public class ReservationRepository : IReservationRepository
     public async Task Update( Reservation reservation )
     {
         _dbContext.Reservations.Update( reservation );
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public async Task Delete( Reservation reservation )
-    {
-        _dbContext.Reservations.Remove( reservation );
         await _dbContext.SaveChangesAsync();
     }
 }

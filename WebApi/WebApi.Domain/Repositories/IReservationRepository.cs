@@ -9,5 +9,4 @@ public interface IReservationRepository
     public Task<IEnumerable<Reservation>> GetByPropertyId( int propertyId );
     public Task<IEnumerable<Reservation>?>? GetByGuest(string guestName, string? phoneNumber = null );
     public Task Update( Reservation reservation );
-    public Task Delete( Reservation reservation );
 }

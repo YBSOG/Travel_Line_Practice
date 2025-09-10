@@ -14,6 +14,7 @@ public class PropertyConfiguration : IEntityTypeConfiguration<Property>
         builder.Property( p => p.Address ).HasMaxLength( 30 ).IsRequired();
         builder.Property( p => p.Latitude ).HasColumnType( "decimal(9,6)" ).IsRequired();
         builder.Property( p => p.Longitude ).HasColumnType( "decimal(9,6)" ).IsRequired();
+        builder.Property( p => p.IsDeleted ).HasDefaultValue( false ).IsRequired();
 
         builder.HasMany( p => p.RoomTypes )
             .WithOne( rt => rt.Property )

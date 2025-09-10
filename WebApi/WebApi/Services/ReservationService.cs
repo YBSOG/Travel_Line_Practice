@@ -69,8 +69,10 @@ namespace WebApi.Services
 
             if ( !isAvailable ) throw new InvalidOperationException( "Room is not available for selected date" );
 
-            RoomType? roomType = await _roomTypeRepository.GetById( reservationDto.RoomTypeId );
+            Property? property = await _propertyRepository.GetById( reservationDto.PropertyId );
+            if ( property is null ) throw new KeyNotFoundException( "Property not found" );
 
+            RoomType? roomType = await _roomTypeRepository.GetById( reservationDto.RoomTypeId );
             if ( roomType is null ) throw new KeyNotFoundException( "Room type not found" );
 
             int days = ( reservationDto.DepartureDate - reservationDto.ArrivalDate ).Days;
@@ -84,17 +86,21 @@ namespace WebApi.Services
                 ArrivalDate = reservationDto.ArrivalDate,
                 DepartureDate = reservationDto.DepartureDate,
                 ArrivalTime = reservationDto.ArrivalTime,
-                DepartureTime = reservationDto.ArrivalTime,
+                DepartureTime = reservationDto.DepartureTime,
                 GuestName = reservationDto.GuestName,
                 GuestPhoneNumber = reservationDto.GuestPhoneNumber,
                 Total = totalPrice,
                 Currency = roomType.Currency,
-                IsCancelled = false
+                IsCancelled = false,
+
+                Property = property,
+                RoomType = roomType
             };
 
+            ReservationResponseDto responseDto = Mapper.MapToReservationDto( reservation );
             await _reservationRepository.Create( reservation );
 
-            return Mapper.MapToReservationDto( reservation );
+            return responseDto;
         }
 
         public async Task<bool> CancelReservation( int reservationId )

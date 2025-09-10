@@ -10,5 +10,4 @@ public interface IRoomTypeRepository
     public Task<IEnumerable<RoomType>> GetByPropertyId( int propertyId );
     public Task<bool> IsRoomTypeAvailable( int roomTypeId, DateTime arrivalDate, DateTime departureDate );
     public Task Update( RoomType roomType );
-    public Task Delete ( RoomType roomType );
 }

@@ -2,7 +2,6 @@
 using WebApi.Domain.Entities;
 using WebApi.Domain.Repositories;
 using WebApi.Dto;
-using WebApi.Infrastructure.Repositories;
 using WebApi.Map;
 using WebApi.Services;
 
@@ -57,7 +56,10 @@ namespace WebApi.Controllers
             try
             {
                 ReservationResponseDto reservation = await _reservationService.CreateReservation( reservationDto );
-                return CreatedAtAction( nameof( GetReservationById ), new { id = reservation.Id } );
+
+                return CreatedAtAction( nameof( GetReservationById ),
+                    new { id = reservation.Id },
+                    reservation );
             }
             catch ( InvalidOperationException ex )
             {

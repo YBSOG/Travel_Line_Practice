@@ -8,5 +8,4 @@ public interface IPropertyRepository
     public Task<Property?> GetById( int id );
     public Task<IEnumerable<Property?>?> Search( string? city, int? minPersonCount, int? maxPersonCount, decimal? maxPrice );
     public Task Update( Property property );
-    public Task Delete( Property property );
 }

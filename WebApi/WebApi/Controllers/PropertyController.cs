@@ -73,10 +73,12 @@ public class PropertyController : ControllerBase
     public async Task<ActionResult<Property>> DeleteProperty( [FromRoute] int id )
     {
         Property? property = await _propertyRepository.GetById( id );
-        if ( property is null ) return NotFound( "Property don't exist" );
+        if ( property is null )
+            return NotFound( "Property don't exist" );
 
-        await _propertyRepository.Delete( property );
+        property.IsDeleted = true;
 
-        return Ok();
+        await _propertyRepository.Update( property );
+        return NoContent();
     }
 }

@@ -12,8 +12,8 @@ using WebApi.Infrastructure;
 namespace WebApi.Infrastructure.Migrations
 {
     [DbContext(typeof(WebApiDbContext))]
-    [Migration("20250826113515_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250909150945_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,11 @@ namespace WebApi.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<decimal>("Latitude")
                         .HasColumnType("decimal(9,6)");
@@ -145,6 +150,11 @@ namespace WebApi.Infrastructure.Migrations
 
                     b.Property<decimal>("DailyPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<int>("MaxPersonCount")
                         .HasColumnType("int");

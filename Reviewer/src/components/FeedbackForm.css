@@ -1,0 +1,147 @@
+.feedback-form {
+  background: white;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+.name-input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 18px;
+  background: #f8f9fa;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  background: white;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.rating-btn {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #dcdcdc;
+  border-radius: 8px;
+  background: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rating-btn:hover {
+  border-color: #4a90e2;
+  background: #f0f8ff;
+}
+
+.rating-btn.active {
+  background: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+}
+
+.rating-display {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  min-width: 60px;
+}
+
+.feedback-textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #f8f9fa;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.feedback-textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  background: white;
+}
+
+.submit-btn {
+  width: 100%;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover {
+  background: #357abD;
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+}
+
+.success-message {
+  text-align: center;
+  padding: 60px 20px;
+  background: #4a90e2;
+  color: white;
+  border-radius: 12px;
+}
+
+.success-message h3 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .rating-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .rating-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .rating-btn {
+    flex: 1;
+    min-width: 40px;
+  }
+}

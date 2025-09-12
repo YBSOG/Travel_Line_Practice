@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON-DIFF</title>
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+
+<body>
+  <header>
+    <a href="#" class="logo" id="logo">JSON-DIFF</a>
+    <div class="user-info">
+      <span id="user-greeting" class="hidden"></span>
+      <a href="#" class="auth-link" id="auth-link">Log in</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Promo Section -->
+    <section id="promo-section" class="promo-section">
+      <h1>Compare two JSON objects and see the differences</h1>
+      <p>
+        Easily visualize changes between JSON objects with our simple diff
+        tool
+      </p>
+      <a href="#" class="start-btn hidden" id="start-btn">Start</a>
+    </section>
+
+    <!-- Login Form -->
+    <section id="login-section" class="login-container hidden">
+      <h2>Login Form</h2>
+      <div class="form-group">
+        <label for="username">LOGIN</label>
+        <input type="text" id="username" placeholder="Enter your username" />
+        <div class="error-message" id="login-error">Обязательное поле</div>
+      </div>
+      <button class="submit-btn" id="login-btn">SIGN IN</button>
+    </section>
+
+    <!-- JSON Compare Form -->
+    <section id="compare-section" class="compare-container hidden">
+      <div class="json-inputs">
+        <div class="json-input">
+          <label for="old-json">OLD JSON</label>
+          <textarea id="old-json" placeholder='{"key": "value"}'></textarea>
+          <div class="error-container">
+            <div class="error-message" id="old-json-error"></div>
+          </div>
+        </div>
+        <div class="json-input">
+          <label for="new-json">NEW JSON</label>
+          <textarea id="new-json" placeholder='{"key": "value"}'></textarea>
+          <div class="error-container">
+            <div class="error-message" id="new-json-error"></div>
+          </div>
+        </div>
+      </div>
+      <button class="compare-btn" id="compare-btn">SHOW DIFFERENCE</button>
+    </section>
+
+    <!-- Result Display -->
+    <section id="result-section" class="result-container hidden">
+      <h3>RESULT</h3>
+      <pre id="result"></pre>
+    </section>
+  </div>
+
+  <footer>Copyright 2025 ©</footer>
+
+  <script type="module" src="src/index.js"></script>
+</body>
+
+</html>
